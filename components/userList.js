@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import UserRow from './UserRow';
+import ElementList from './ElementList';
 import {connect} from 'react-redux';
 import {deleteUser} from './actions/userActions';
 import {bindActionCreators} from 'redux';
 
-class userList extends Component {
+class UserList extends Component {
     render() {
         let listItems = this.props.users.filter((el) => {return el.name.includes(this.props.query)});
         return (
             <div>
                 <ul>
-                    {listItems.map((el, index) => {return <UserRow key={index} value={el} deleteUser={this.props.deleteUser}/>})}
+                    {listItems.map((el, id) => {return <ElementList key={id} value={el} deleteUser={this.props.deleteUser}/>})}
                 </ul>
             </div>
         )
@@ -25,4 +25,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {deleteUser: bindActionCreators(deleteUser, dispatch)}
 };
-export default connect(mapStateToProps, mapDispatchToProps)(userList);
+export default connect(mapStateToProps, mapDispatchToProps)(UserList);

@@ -1,40 +1,39 @@
 const initialState = {
     users: [],
-    currentUser: {},
     name: '',
     id: '',
     query:''
 };
 
+let id = 0;
+
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case 'CREATE_USER': {
+            let newState = {};
             let userArray = state.users.slice();
-            userArray.push({name: state.name, id: state.id});
-            return Object.assign({}, state, {users: userArray, currentUser: userArray[0], name:'', id:''});
+            userArray.push({name: state.name, id: id++});
+            return Object.assign({}, state, {users: userArray, name:'', id:''});
         }
-
         case 'DELETE_USER': {
             let userArray = state.users.slice();
-            let userIndex = null;
-            state.users.map((el, index) => {(el.id === action.id) ? userIndex = index : null;});
-            userArray.splice(userIndex, 1);
+            let userId = null;
+            state.users.map((el, index) => {(el.id === action.id) ? userId = index : null;});
+            userArray.splice(userId, 1);
             let updatedState = {users: userArray};
-            if (state.currentUser.id === action.id) {
-                updatedState['currentUser'] = userArray.length >= 1 ? userArray[0] : {
-                    name: null,
-                    id: null
-                };
-            }
             return Object.assign({}, state, updatedState);
         }
         case 'UPDATE_FIELD': {
             let newState = {};
+            newState = Object.assign({}, state); 
             newState[action.data.field] = action.data.value;
-            return Object.assign({}, state, newState);
+            return newState;
         }
         case 'FILTER_USERS': {
-            return Object.assign({}, state, {query:action.query});
+            let newState = {};
+            newState = Object.assign({}, state); 
+            newState.query = action.query;
+            return newState;
         }
         default:
             return state;

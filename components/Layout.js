@@ -1,7 +1,8 @@
 import React, {Component}  from 'react';
-import userAdd from './userAdd';
-import userList from './userList';
+import UserAdd from './UserAdd';
 import FilterComponent from './FilterComponent';
+import UserList from './UserList';
+
 
 export default class Layout extends Component {
     render() {
@@ -11,7 +12,7 @@ export default class Layout extends Component {
                 <div>
                     <div>
                         <h4>Add new user</h4>
-                        <userAdd/>
+                        <UserAdd/>
                     </div>
                     <div>
                         <h4>Search user</h4>
@@ -19,7 +20,7 @@ export default class Layout extends Component {
                     </div>
                     <div>
                         <h4>UserList</h4>
-                        <userList/>
+                        <UserList/>
                     </div>
                 </div>
             </div>
